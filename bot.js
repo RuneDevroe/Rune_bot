@@ -1,33 +1,18 @@
-const { Client, Intents } = require('discord.js');
-const command = require('./command');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
-const config = require('./config.json');
+require("dotenv").config()
 
-client.on('ready', ()=> {
-    console.log('The client is ready!')
+const { Client } = require('discord.js');
+const client = new Client();
 
-    command(client, 'ping', (message) => {
-        message.channel.send('Pong!')
-    })
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
 
-    command(client, 'hoe dik is nico', (message) => {
-        message.channel.send('zeer dik')
-    })
+client.on('interactionCreate', async interaction => {
+  if (!interaction.isChatInputCommand()) return;
 
-    command(client, 'servers', (message) =>{
-        client.guilds.cache.forEach((guild =>{
-            message.channel.send(`${guild.name} has a total of ${guild.memberCount} members`)
-        }))
-    })
-    command(client, 'status', (message) =>{
-        const content = message.content.replace('!status ', '')
-        client.user.setPresence({
-            activity:{
-                name: content,
-                type: 0
-            }
-        })
-    })
-})
+  if (interaction.commandName === 'ping') {
+    await interaction.reply('Pong!');
+  }
+});
 
-client.login(process.env.BOT_TOKEN)
+client.login(process.env.BOT_TOKEN);
