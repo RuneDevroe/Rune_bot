@@ -4,10 +4,11 @@ const { Client, GatewayIntentBits } = require('discord.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.on('ready', () => {
-  console.log("bot is running");
+  console.log("bot is running")
 });
 
 client.on('message', msg => {
+    console.log("testing ping")
     if(msg.content === 'ping'){
         console.log("ping")
         msg.channel.send('Pong!')
