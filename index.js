@@ -18,4 +18,4 @@ client.on('interactionCreate', async interaction => {
 });
 
 // Login to Discord with your client's token
-client.login("MTAzMDgzNzA1NjIxNTIwODAyNg.GLOJkw.3RCHGI74g-BQeQ2wA1B8MchbSCr1vKXzBkl9CE");
+client.login(process.env.BOT_TOKEN);
